@@ -4,7 +4,7 @@ module Closeio
     # Options: '_limit' => 1000, 'query' => 'custom.status:2'
     #
     def self.where opts={}
-      res = get(resource_path, query: opts)
+      res = get(resource_path, :query => opts)
 
       if res.success?
         res['data'].nil? ? [] : res['data'].map{|obj| new(obj)}
@@ -14,11 +14,11 @@ module Closeio
     end
 
     def emails
-      Closeio::EmailActivity.where lead_id: self.id
+      Closeio::EmailActivity.where :lead_id => self.id
     end
 
     def notes
-      Closeio::NoteActivity.where lead_id: self.id
+      Closeio::NoteActivity.where :lead_id => self.id
     end
 
     def contact

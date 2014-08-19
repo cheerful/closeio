@@ -5,7 +5,7 @@ module Closeio
     end
 
     def self.leads organization_id, opts={}
-      get "#{resource_path}lead/#{organization_id}/", query: opts
+      get "#{resource_path}lead/#{organization_id}/", :query => opts
     end
   end
 end

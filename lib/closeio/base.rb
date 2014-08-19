@@ -22,7 +22,7 @@ module Closeio
     end
 
     def save
-      put "#{resource_path}#{self.id}/", body: self.to_h.to_json
+      put "#{resource_path}#{self.id}/", :body => self.to_h.to_json
     end
 
     class << self
@@ -45,7 +45,7 @@ module Closeio
 
       # Closeio::Lead.create name: "Bluth Company", contacts: [{name: "Buster Bluth", emails: [{email: "cartographer@bluthcompany.com"}]}]
       def create opts={}
-        res = post resource_path, body: opts.to_json
+        res = post resource_path, :body => opts.to_json
         res.success? ? new(res) : bad_response(res)
       end
 
@@ -53,7 +53,7 @@ module Closeio
       # Closeio::Lead.update '39292', name: "Bluth Company", contacts: [{name: "Buster Bluth", emails: [{email: "cartographer@bluthcompany.com"}]}]
       #
       def update id, opts={}
-        put "#{resource_path}#{id}/", body: opts.to_json
+        put "#{resource_path}#{id}/", :body => opts.to_json
       end
 
       def destroy id
@@ -66,7 +66,7 @@ module Closeio
       end
 
       def where opts={}
-        res = get(resource_path, query: opts)
+        res = get(resource_path, :query => opts)
 
         if res.success?
           res['data'].nil? ? [] : res['data'].map{|obj| new(obj)}

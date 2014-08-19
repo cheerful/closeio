@@ -13,6 +13,10 @@ module Closeio
 
     attr_reader :data
 
+    def id
+      @table[:id]
+    end
+
     def initialize attrs={}
       if attrs['data']
         super attrs['data']
